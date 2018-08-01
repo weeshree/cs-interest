@@ -1,10 +1,7 @@
-
+// array of circles
 var circles = [];
 
-function numConv(strsd)
-{
-	return Number(strsd.substring(0, 3));
-}
+// position where circles shouldn't be close to, center of form
 var xPos = 0, yPos = 0;
 
 
@@ -22,7 +19,7 @@ $(window).on('resize', function() {
 });
 
 
-// On load, send thank you... basic but it works.
+// On load, set position and clear out any "Thank you for submission" thingies.
 $(document).ready(function()
 {
 	$('.msg').fadeOut(2000);
@@ -33,7 +30,7 @@ $(document).ready(function()
 });
 
 
-
+// dictionary of sounds
 var sounDict = [];
 
 
@@ -47,18 +44,14 @@ var pC = 0, pM = 0;
 var allNums = [];
 function getSound(ch)
 {
-	//27 31 35 36 30 
 
 	var num = (ch+'').charCodeAt(0);
-	if(!allNums.includes(num))
-	{
-		allNums.push(num); allNums.sort(function(a,b){return a-b;});
-	}
-	// if char previously assigned to sound
+
 	
 	// stringy thingy for returning
 	mFile = '';
 
+	// if character previously assigned to sound
 	if(ch in sounDict)
 	{
 		mFile = sounDict[ch];
@@ -82,18 +75,20 @@ function getSound(ch)
 	else
 	{
 		pM ++;
-		//if out of percussion, return p1
+		//if out of music, return s1
 		if(music.length === 0)
 			mFile = 's1';
 		else
 		{
-			//return random percussion
+			//return random music
 			var ind = 0;
 			mFile = 's'+music[ind = Math.floor(Math.random()*music.length)];
 			music.splice(ind, 1);
 		}
 	}
 	sounDict[ch] = mFile;
+
+	// for the ardent developer, go to console to track annoying sounds in your music development and delete them from /sounds, renumber files and change numPercuss/numMusic
 	console.log('Think '+mFile+'.mp3 was mildly annoying? Delete it!');
 	return new Howl({src: ['sounds/'+mFile+'.mp3']});
 }
