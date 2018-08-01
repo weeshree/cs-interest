@@ -1,3 +1,3 @@
-#cs-interest 
+# cs-interest
 
-Interest form in php with cool sound/color effects using howler.js, paper.js.
+Interest form for incoming Dulles freshmen in php with cool sound/color effects using howler.js, paper.js.
